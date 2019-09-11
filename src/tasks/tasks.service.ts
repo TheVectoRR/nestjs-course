@@ -11,7 +11,7 @@ export class TasksService {
     constructor(
         @InjectRepository(TaskRepository)
         private taskRepository: TaskRepository,
-    ){}
+    ) {}
 
     // public getAllTasks(): Task[] {
     //     return this.tasks;
