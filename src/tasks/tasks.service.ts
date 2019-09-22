@@ -52,14 +52,12 @@ export class TasksService {
         if (result.affected === 0) {
             throw new NotFoundException(`task with ID: '${id}' not found`);
         }
-
-        // const found = await this.getTaskById(id);
-        // this.tasks = this.tasks.filter(task => task.id !== found.id);
     }
 
-    // public updateTaskById(id: string, status: TaskStatus): Task {
-    //     const task = this.getTaskById(id);
-    //     task.status = status;
-    //     return task;
-    // }
+    public async updateTaskById(id: number, status: TaskStatus): Promise<Task> {
+        const task = await this.getTaskById(id);
+        task.status = status;
+        await task.save();
+        return task;
+    }
 }
