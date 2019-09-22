@@ -13,10 +13,6 @@ export class TasksService {
         private taskRepository: TaskRepository,
     ) {}
 
-    // public getAllTasks(): Task[] {
-    //     return this.tasks;
-    // }
-
     // public getTasksWithFilters(filterDto: GetTasksFilterDTO): Task[] {
     //     const { status, search } = filterDto;
 
@@ -49,10 +45,17 @@ export class TasksService {
         return found;
     }
 
-    // public deleteTaskById(id: string): void {
-    //     const found = this.getTaskById(id);
-    //     this.tasks = this.tasks.filter(task => task.id !== found.id);
-    // }
+    public async deleteTaskById(id: number): Promise<void> {
+
+        const result = await this.taskRepository.delete(id);
+
+        if (result.affected === 0) {
+            throw new NotFoundException(`task with ID: '${id}' not found`);
+        }
+
+        // const found = await this.getTaskById(id);
+        // this.tasks = this.tasks.filter(task => task.id !== found.id);
+    }
 
     // public updateTaskById(id: string, status: TaskStatus): Task {
     //     const task = this.getTaskById(id);
